@@ -13,10 +13,12 @@ const Footer = ({ siteInfo }) => {
     parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
   return (
-    <footer className='z-20 border p-2 rounded-lg bg:white dark:border-black dark:bg-hexo-black-gray justify-center text-center w-full text-sm relative'>
+    <footer className='z-20 bg:white dark:bg-hexo-black-gray justify-center text-center w-full text-sm relative'>
+      <hr className='pb-2' />
+
       <SocialButton />
 
-      <div className='flex justify-center'>
+      <div className='flex justify-center pt-1'>
         <div>
           <i className='mx-1 animate-pulse fas fa-heart' />{' '}
           <a
@@ -27,6 +29,15 @@ const Footer = ({ siteInfo }) => {
           .<br />
         </div>
         © {`${copyrightDate}`}
+      </div>
+
+      <div className='text-xs font-serif'>
+        Powered By{' '}
+        <a
+          href='https://github.com/tangly1024/NotionNext'
+          className='underline text-gray-500 dark:text-gray-300'>
+          NotionNext {siteConfig('VERSION')}
+        </a>
       </div>
 
       {siteConfig('BEI_AN') && (
@@ -47,14 +58,6 @@ const Footer = ({ siteInfo }) => {
         <i className='fas fa-users' />{' '}
         <span className='px-1 busuanzi_value_site_uv'> </span>{' '}
       </span>
-      <div className='text-xs font-serif'>
-        Powered By{' '}
-        <a
-          href='https://github.com/tangly1024/NotionNext'
-          className='underline text-gray-500 dark:text-gray-300'>
-          NotionNext {siteConfig('VERSION')}
-        </a>
-      </div>
       {/* SEO title */}
       <h1 className='pt-1 hidden'>{siteConfig('TITLE')}</h1>
     </footer>

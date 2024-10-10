@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { siteConfig } from '@/lib/config'
 import Link from 'next/link'
+import CONFIG from '../config'
 
 /**
  * 博文列表
@@ -18,14 +19,14 @@ export const Blog = ({ posts }) => {
             <div className='w-full px-4'>
               <div className='mx-auto mb-[60px] max-w-[485px] text-center'>
                 <span className='mb-2 block text-lg font-semibold text-primary'>
-                  {siteConfig('STARTER_BLOG_TITLE')}
+                  {siteConfig('STARTER_BLOG_TITLE', null, CONFIG)}
                 </span>
                 <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]'>
-                  {siteConfig('STARTER_BLOG_TEXT_1')}
+                  {siteConfig('STARTER_BLOG_TEXT_1', null, CONFIG)}
                 </h2>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: siteConfig('STARTER_BLOG_TEXT_2')
+                    __html: siteConfig('STARTER_BLOG_TEXT_2', null, CONFIG)
                   }}
                   className='text-base text-body-color dark:text-dark-6'></p>
               </div>

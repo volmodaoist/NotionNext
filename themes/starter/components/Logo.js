@@ -5,6 +5,7 @@ import { useGlobal } from '@/lib/global'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import CONFIG from '../config'
 
 /**
  * 站点图标
@@ -13,7 +14,7 @@ import { useEffect, useState } from 'react'
 export const Logo = ({ white }) => {
   const router = useRouter()
   const { isDarkMode } = useGlobal()
-  const logoWhite = siteConfig('STARTER_LOGO_WHITE')
+  const logoWhite = siteConfig('STARTER_LOGO_WHITE', null, CONFIG)
   const [logo, setLogo] = useState(logoWhite)
   const [logoTextColor, setLogoTextColor] = useState('text-white')
 
@@ -25,10 +26,10 @@ export const Logo = ({ white }) => {
       // 何时显示浅色或白底的logo
       const homePageNavBar = router.route === '/' && scrollY < 10 // 在首页并且视窗在页面顶部
       if (white || isDarkMode || homePageNavBar) {
-        setLogo(siteConfig('STARTER_LOGO_WHITE'))
+        setLogo(siteConfig('STARTER_LOGO_WHITE', null, CONFIG))
         setLogoTextColor('text-white')
       } else {
-        setLogo(siteConfig('STARTER_LOGO'))
+        setLogo(siteConfig('STARTER_LOGO', null, CONFIG))
         setLogoTextColor('text-black')
       }
     }, throttleMs)

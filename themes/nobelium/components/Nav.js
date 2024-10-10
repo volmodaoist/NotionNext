@@ -1,5 +1,4 @@
 import Collapse from '@/components/Collapse'
-import DarkModeButton from '@/components/DarkModeButton'
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
@@ -15,7 +14,7 @@ import { SvgIcon } from './SvgIcon'
  * 顶部导航
  */
 const Nav = props => {
-  const { post, fullWidth, siteInfo } = props
+  const { navBarTitle, fullWidth, siteInfo } = props
   const autoCollapseNavBar = siteConfig(
     'NOBELIUM_AUTO_COLLAPSE_NAV_BAR',
     true,
@@ -55,7 +54,7 @@ const Nav = props => {
           <Link href='/' aria-label={siteConfig('TITLE')}>
             <div className='h-6 w-6'>
               {/* <SvgIcon/> */}
-              {siteConfig('NOBELIUM_NAV_NOTION_ICON') ? (
+              {siteConfig('NOBELIUM_NAV_NOTION_ICON', null, CONFIG) ? (
                 <LazyImage
                   src={siteInfo?.icon}
                   width={24}
@@ -67,9 +66,9 @@ const Nav = props => {
               )}
             </div>
           </Link>
-          {post ? (
+          {navBarTitle ? (
             <p className='ml-2 font-medium text-gray-800 dark:text-gray-300 header-name'>
-              {post?.title}
+              {navBarTitle}
             </p>
           ) : (
             <p className='ml-2 font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap'>
@@ -98,32 +97,34 @@ const NavBar = props => {
       id: 2,
       name: locale.NAV.RSS,
       href: '/feed',
-      show: siteConfig('ENABLE_RSS') && siteConfig('NOBELIUM_MENU_RSS'),
+      show:
+        siteConfig('ENABLE_RSS') &&
+        siteConfig('NOBELIUM_MENU_RSS', null, CONFIG),
       target: '_blank'
     },
     {
       icon: 'fas fa-search',
       name: locale.NAV.SEARCH,
       href: '/search',
-      show: siteConfig('NOBELIUM_MENU_SEARCH')
+      show: siteConfig('NOBELIUM_MENU_SEARCH', null, CONFIG)
     },
     {
       icon: 'fas fa-archive',
       name: locale.NAV.ARCHIVE,
       href: '/archive',
-      show: siteConfig('NOBELIUM_MENU_ARCHIVE')
+      show: siteConfig('NOBELIUM_MENU_ARCHIVE', null, CONFIG)
     },
     {
       icon: 'fas fa-folder',
       name: locale.COMMON.CATEGORY,
       href: '/category',
-      show: siteConfig('NOBELIUM_MENU_CATEGORY')
+      show: siteConfig('NOBELIUM_MENU_CATEGORY', null, CONFIG)
     },
     {
       icon: 'fas fa-tag',
       name: locale.COMMON.TAGS,
       href: '/tag',
-      show: siteConfig('NOBELIUM_MENU_TAG')
+      show: siteConfig('NOBELIUM_MENU_TAG', null, CONFIG)
     }
   ]
   if (customNav) {
@@ -166,14 +167,12 @@ const NavBar = props => {
         </Collapse>
       </div>
 
-      {siteConfig('NOBELIUM_MENU_DARKMODE_BUTTON') && (
-        <DarkModeButton className='text-center p-2.5 hover:bg-black hover:bg-opacity-10 rounded-full' />
-      )}
-
-      {siteConfig('NOBELIUM_MENU_RANDOM_POST') && (
+      {JSON.parse(siteConfig('NOBELIUM_MENU_RANDOM_POST', null, CONFIG)) && (
         <RandomPostButton {...props} />
       )}
-      {siteConfig('NOBELIUM_MENU_SEARCH_BUTTON') && <SearchButton {...props} />}
+      {JSON.parse(siteConfig('NOBELIUM_MENU_SEARCH_BUTTON', null, CONFIG)) && (
+        <SearchButton {...props} />
+      )}
       <i
         onClick={toggleOpen}
         className='fas fa-bars cursor-pointer px-5 flex justify-center items-center md:hidden'></i>
